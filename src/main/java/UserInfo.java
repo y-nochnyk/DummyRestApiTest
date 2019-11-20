@@ -12,7 +12,7 @@ public class UserInfo {
             " \"age\":\"55\"\n" +
             "}";
 
-    static String post_name = "test_user_0001";
+    static String post_name = "test_user_1001";
     static String put_name = "test_user_1002";
     static String deleted = "deleted";
 }
