@@ -10,3 +10,14 @@ Status code :200
 Response :{"success":{"text":"successfully! deleted Records"}}
 Status code :200
 2019-11-20 15:19:20 INFO : All tests PASSED!
+2019-11-21 15:16:47 INFO : TEST 1: Creating new user
+Response :{"name":"test_user_1001","salary":"15000","age":"55","id":"128430"}
+Status code :200
+2019-11-21 15:16:48 INFO : TEST 2: Verifying user is created - SUCCESS
+Status code :200
+2019-11-21 15:16:48 INFO : TEST 3: Updating user info
+Response :{"name":"test_user_1002","salary":"00051","age":"55"}
+Status code :200
+2019-11-21 15:16:49 INFO : TEST 4: Removing the user
+Response :{"success":{"text":"successfully! deleted Records"}}
+Status code :200
