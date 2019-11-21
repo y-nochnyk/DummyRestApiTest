@@ -1,22 +1,22 @@
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import org.apache.log4j.Logger;
 import static org.testng.Assert.*;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static io.restassured.RestAssured.given;
 
 public class DummyRestApiTest {
 
-    private static final Logger LOG = Logger.getLogger(DummyRestApiTest.class);
+    private Log log;
 
     @BeforeClass
     public void setUp(){
 
         //Setting up base URI
         RestAssured.baseURI = Endpoints.BASE_URI;
+
+        log = new Log();
     }
 
     @Test(priority = 1)
@@ -39,8 +39,10 @@ public class DummyRestApiTest {
         // Verification of the '200' status code
         assertEquals(200, response.getStatusCode());
 
-        LOG.info("TEST 1: Creating new user" + "\nResponse :" + response.getBody().asString()
-                + "\nStatus code :" + response.getStatusCode());
+        // Log with test results
+        String logMessage = "TEST 1: Creating new user" + "\nResponse :" + response.getBody().asString()
+                + "\nStatus code :" + response.getStatusCode();
+        log.getLog(response.statusCode(), logMessage);
     }
 
     @Test(priority = 2)
@@ -57,8 +59,9 @@ public class DummyRestApiTest {
         // Checking if there's employee with specific name
         assertTrue(response.asString().contains(UserInfo.post_name));
 
-        LOG.info("TEST 2: Verifying user is created - SUCCESS"
-                + "\nStatus code :" + response.getStatusCode());
+        // Log with test results
+        String logMessage = "TEST 2: Verifying user is created - SUCCESS" + "\nStatus code :" + response.getStatusCode();
+        log.getLog(response.statusCode(), logMessage);
     }
 
     @Test(priority = 3)
@@ -79,8 +82,10 @@ public class DummyRestApiTest {
         // Checking if there's employee with specific updated name
         assertTrue(response.asString().contains(UserInfo.put_name));
 
-        LOG.info("TEST 3: Updating user info" + "\nResponse :" + response.getBody().asString()
-                + "\nStatus code :" + response.getStatusCode());
+        // Log with test results
+        String logMessage = "TEST 3: Updating user info" + "\nResponse :" + response.getBody().asString()
+                + "\nStatus code :" + response.getStatusCode();
+        log.getLog(response.statusCode(), logMessage);
     }
 
     @Test(priority = 4)
@@ -99,12 +104,9 @@ public class DummyRestApiTest {
         // Checking if the response contains word 'deleted' meaning the user has been removed from the database
         assertTrue(response.asString().contains(UserInfo.deleted));
 
-        LOG.info("TEST 4: Removing the user" + "\nResponse :" + response.getBody().asString()
-                + "\nStatus code :" + response.getStatusCode());
-    }
-
-    @AfterClass
-    public void tearDown(){
-        LOG.info("All tests PASSED!");
+        // Log with test results
+        String logMessage = "TEST 4: Removing the user" + "\nResponse :" + response.getBody().asString()
+                + "\nStatus code :" + response.getStatusCode();
+        log.getLog(response.statusCode(), logMessage);
     }
 }
